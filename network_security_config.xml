@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  TMS Network Security Config
+  Allows HTTP (cleartext) traffic to localhost / 10.0.2.2
+  Required for Android 9+ which blocks cleartext by default
+-->
+<network-security-config>
+  <domain-config cleartextTrafficPermitted="true">
+    <!-- Android emulator localhost -->
+    <domain includeSubdomains="true">10.0.2.2</domain>
+    <!-- Physical device on same WiFi (update IP as needed) -->
+    <domain includeSubdomains="true">10.239.94.21</domain>
+    <domain includeSubdomains="true">localhost</domain>
+    <domain includeSubdomains="true">127.0.0.1</domain>
+  </domain-config>
+</network-security-config>
