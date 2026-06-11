@@ -27,11 +27,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Add Android platform
-        run: npx cap add android
-
-      - name: Copy web assets
-        run: npx cap copy android
+      - name: Sync Android platform
+        run: npx cap sync android
 
       - name: Patch network_security_config.xml
         run: |
