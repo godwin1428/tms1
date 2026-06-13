@@ -64,6 +64,7 @@ jobs:
         target: google_apis
         arch: x86_64
         profile: pixel_5
+        disable-animations: true
         script: |
           # Start Appium Server securely with autodownload in background
           appium --allow-insecure uiautomator2:chromedriver_autodownload &
@@ -72,11 +73,9 @@ jobs:
           # Execute the test suite
           python tests/appium_e2e_suite.py
 
-    - name: Commit and Push Generated Excel Report
+    - name: Upload Excel Report as Artifact
       if: always()
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add E2E_Test_Report_TMS_*.xlsx || echo "No report found"
-        git commit -m "docs: generate automated E2E Appium report [skip ci]" || echo "No changes to commit"
-        git push
+      uses: actions/upload-artifact@v4
+      with:
+        name: e2e-test-report
+        path: E2E_Test_Report_TMS_*.xlsx
