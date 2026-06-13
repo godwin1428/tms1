@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: macos-latest # Required for hardware acceleration for Android Emulators
+    runs-on: macos-13 # Required for x86_64 hardware acceleration for Android Emulators
 
     steps:
     - name: Checkout repository
