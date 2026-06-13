@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest # Linux runners support KVM hardware acceleration for x86_64 AVDs
+    runs-on: macos-latest # Apple Silicon (M1) runners provide instant booting with aarch64 emulators
 
     steps:
     - name: Checkout repository
@@ -60,9 +60,9 @@ jobs:
       env:
         CI_APK_PATH: ${{ github.workspace }}/android/app/build/outputs/apk/debug/app-debug.apk
       with:
-        api-level: 30
+        api-level: 34
         target: google_apis
-        arch: x86_64
+        arch: aarch64
         profile: pixel_5
         disable-animations: true
         script: |
