@@ -1,5 +1,6 @@
 import os
 import openpyxl
+import datetime
 
 def parse_report(filepath):
     wb = openpyxl.load_workbook(filepath, data_only=True)
@@ -49,7 +50,8 @@ def main():
     markdown_output.append(f"| **Failed** | ❌ {e2e_summary.get('Failed')} |")
     markdown_output.append(f"| **Pass Rate** | **{e2e_summary.get('Pass Rate %')}%** |")
     markdown_output.append(f"| **Duration** | {e2e_summary.get('Duration (sec)')} sec |")
-    markdown_output.append(f"| **Timestamp** | {e2e_summary.get('End Time')} |")
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    markdown_output.append(f"| **Timestamp** | {current_time} |")
     markdown_output.append("\n")
     
     # Security Vulnerability Summary
@@ -62,7 +64,7 @@ def main():
     markdown_output.append(f"| **Failed** | ❌ {sec_summary.get('Failed')} |")
     markdown_output.append(f"| **Pass Rate** | **{sec_summary.get('Pass Rate %')}%** |")
     markdown_output.append(f"| **Duration** | {sec_summary.get('Duration (sec)')} sec |")
-    markdown_output.append(f"| **Timestamp** | {sec_summary.get('End Time')} |")
+    markdown_output.append(f"| **Timestamp** | {current_time} |")
     markdown_output.append("\n")
     
     # E2E Details Expandable Section
