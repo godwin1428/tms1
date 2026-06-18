@@ -85,20 +85,23 @@ jobs:
           pip install openpyxl pandas
 
       - name: Generate E2E Test Report
+        working-directory: appiumtest
         run: |
           python update_template.py
           TIMESTAMP=$(date +"%Y-%m-%dT%H-%M-%S")
           NEW_FILENAME="E2E_Test_Results_TMS_${TIMESTAMP}.xlsx"
           mv E2E_Test_Results_TMS_Final.xlsx $NEW_FILENAME
-          echo "REPORT_FILE=$NEW_FILENAME" >> $GITHUB_ENV
+          echo "REPORT_FILE=appiumtest/$NEW_FILENAME" >> $GITHUB_ENV
 
       - name: Generate Vulnerability Report
+        working-directory: appiumtest
         run: |
-          python tests/generate_vulnerability_report.py
+          python generate_vulnerability_report.py
 
       - name: Publish Test Results to Job Summary
+        working-directory: appiumtest
         run: |
-          python tests/publish_results.py
+          python publish_results.py
 
       - name: Upload E2E Test Report
         uses: actions/upload-artifact@v4
@@ -110,7 +113,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Security-Vulnerabilities-Report
-          path: "Vulnerability Test Report.xlsx"
+          path: "appiumtest/Vulnerability Test Report.xlsx"
 
       - name: Success
         run: echo "All backend and Appium E2E tests have passed successfully against the live deployment!"
@@ -134,12 +137,13 @@ jobs:
           pip install aiohttp pandas openpyxl
 
       - name: Run Load Test and Generate Summary
+        working-directory: appiumtest
         run: |
           python load_test.py > load_test_output.txt
           cat load_test_output.txt
           
           REPORT_FILE=$(grep -o 'Load_Test_Report_.*\.xlsx' load_test_output.txt)
-          echo "REPORT_FILE=$REPORT_FILE" >> $GITHUB_ENV
+          echo "REPORT_FILE=appiumtest/$REPORT_FILE" >> $GITHUB_ENV
           
           echo "## 🚀 Load Test Results" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`text" >> $GITHUB_STEP_SUMMARY
