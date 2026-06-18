@@ -137,6 +137,15 @@
   .chat-panel{max-height:400px}
 }
 @media(max-width:768px){
+  .video-layout{height:calc(100vh - var(--header-height) - var(--space-8)); display:flex; flex-direction:column; gap:var(--space-2);}
+  .video-main{flex:1; min-height:0; display:flex; flex-direction:column;}
+  .video-feed{flex:1; min-height:0;}
+  .video-self{width:100px; height:130px; bottom:var(--space-2); right:var(--space-2);}
+  .video-controls{padding:var(--space-2);}
+  .video-controls .btn-icon{width:40px; height:40px; font-size:1rem;}
+  .video-controls .btn-end{width:48px; height:48px;}
+  .chat-panel{height:35%; max-height:none; flex-shrink:0;}
+  
   .vitals-grid{grid-template-columns:1fr 1fr}
   .roster-grid{grid-template-columns:80px repeat(6,1fr);font-size:10px}
   .otp-inputs input{width:40px;height:48px;font-size:var(--text-base)}
