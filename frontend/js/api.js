@@ -8,10 +8,10 @@ const API = (() => {
   // If running on a web server (e.g. laptop on port 8000), use the browser's host
   // If running in Capacitor/Mobile (port is usually empty), use the hardcoded PC IP
   const isMobile = window.location.protocol === 'file:' || window.location.protocol === 'capacitor:' || (window.location.hostname === 'localhost' && window.location.port !== '8000');
-  const HOST = isMobile ? '10.239.94.21:8000' : window.location.host;
+  const HOST = 'tms2-uw41.onrender.com';
   
-  const BASE_URL = `http://${HOST}/api`;
-  const WS_URL   = `ws://${HOST}`;
+  const BASE_URL = `https://${HOST}/api`;
+  const WS_URL   = `wss://${HOST}`;
 
   let _accessToken  = localStorage.getItem('tms_access_token');
   let _refreshToken = localStorage.getItem('tms_refresh_token');
