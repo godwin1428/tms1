@@ -55,12 +55,13 @@ def main():
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
-    repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    e2e_path = os.environ.get("REPORT_FILE", os.path.join(repo_dir, "E2E_Test_Results_TMS_Final.xlsx"))
+    appium_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_dir = os.path.dirname(appium_dir)
+    e2e_path = os.environ.get("REPORT_FILE", os.path.join(appium_dir, "E2E_Test_Cases_Appium.xlsx"))
     if not os.path.isabs(e2e_path):
         e2e_path = os.path.join(repo_dir, e2e_path)
         
-    sec_path = os.path.join(repo_dir, "Vulnerability Test Report.xlsx")
+    sec_path = os.path.join(appium_dir, "Vulnerability Test Report.xlsx")
     
     e2e_summary, e2e_details = parse_e2e_report(e2e_path)
     sec_summary, sec_details = parse_report(sec_path)
