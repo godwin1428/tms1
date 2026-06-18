@@ -90,6 +90,7 @@ jobs:
           TIMESTAMP=$(date +"%Y-%m-%dT%H-%M-%S")
           NEW_FILENAME="E2E_Test_Results_TMS_${TIMESTAMP}.xlsx"
           cp E2E_Test_Cases_Appium.xlsx $NEW_FILENAME
+          python update_timestamps.py $NEW_FILENAME
           echo "REPORT_FILE=appiumtest/$NEW_FILENAME" >> $GITHUB_ENV
 
       - name: Generate Vulnerability Report
